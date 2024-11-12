@@ -25,7 +25,6 @@
 		"networking": true
 	},
 	"login": true,
-	"landingPage": "/wp-admin/",
 	"steps": [
 		{
 			"step": "defineWpConfigConsts",
@@ -37,10 +36,15 @@
 			}
 		},
 {
-  "step": "writeFile",
-  "path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
-  "data": "<?php add_action('template_redirect', function() { if (!isset($_GET['redirected']) && current_user_can('manage_options') && (untrailingslashit($_SERVER['REQUEST_URI']) === '/wp-admin')) { if (is_multisite() && is_main_site()) { wp_redirect(network_admin_url('index.php?page=aspireupdate-settings&redirected=1')); exit; } elseif (!is_multisite()) { wp_redirect(admin_url('admin.php?page=aspireupdate-settings&redirected=1')); exit; } } }); ?>"
-},
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
+      "data": "<?php add_action('template_redirect', function() { if (current_user_can('manage_options')) { if (is_multisite() && is_main_site()) { wp_redirect(network_admin_url('index.php?page=aspireupdate-settings')); exit; } elseif (!is_multisite()) { wp_redirect(admin_url('admin.php?page=aspireupdate-settings')); exit; } } }); ?>"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/rewrite.php",
+      "data": "<?php /* Use pretty permalinks */ add_action( 'after_setup_theme', function() { global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); $wp_rewrite->flush_rules(); } );"
+    },
 		{
 			"step": "writeFile",
 			"path": "/wordpress/wp-content/mu-plugins/rewrite.php",
