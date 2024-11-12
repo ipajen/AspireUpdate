@@ -25,7 +25,6 @@
 		"networking": true
 	},
 	"login": true,
-	"landingPage": "/wp-admin/admin.php?page=aspireupdate-settings",
 	"steps": [
 		{
 			"step": "defineWpConfigConsts",
@@ -37,9 +36,9 @@
 			}
 		},
 		{
-   			 "step": "writeFile",
+  			  "step": "writeFile",
   			  "path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
-  			  "data": "<?php add_action('admin_init', function() { if (is_multisite()) { wp_redirect('/wp-admin/network/index.php?page=aspireupdate-settings'); exit; } else { wp_redirect('/wp-admin/admin.php?page=aspireupdate-settings'); exit; } });"
+ 			   "data": "<?php add_action('admin_init', function() { if (!isset($_GET['redirected']) && current_user_can('manage_options')) { if (is_multisite()) { wp_redirect('/wp-admin/network/index.php?page=aspireupdate-settings&redirected=1'); exit; } else { wp_redirect('/wp-admin/admin.php?page=aspireupdate-settings&redirected=1'); exit; } } });"
 		},
 		{
 			"step": "writeFile",
