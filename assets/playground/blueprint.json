@@ -36,21 +36,12 @@
 			}
 		},
 		{
-{
-  "step": "writeFile",
-  "path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
-  "data": "<?php add_action('init', function() { 
-      if (!isset($_GET['redirected']) && current_user_can('manage_options') && $_SERVER['REQUEST_URI'] === '/') { 
-          if (is_multisite() && is_main_site()) { 
-              wp_redirect('/wp-admin/network/index.php?page=aspireupdate-settings&redirected=1'); 
-              exit; 
-          } elseif (!is_multisite()) { 
-              wp_redirect('/wp-admin/admin.php?page=aspireupdate-settings&redirected=1'); 
-              exit; 
-          } 
-      } 
-  });"
-},
+		  "step": "writeFile",
+  		"path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
+  		"data": "<?php add_action('init', function() {if (!isset($_GET['redirected']) && current_user_can('manage_options') && $_SERVER['REQUEST_URI'] === '/') { 
+          		if (is_multisite() && is_main_site()) {wp_redirect('/wp-admin/network/index.php?page=aspireupdate-settings&redirected=1'); 
+              		exit; } elseif (!is_multisite()) { wp_redirect('/wp-admin/admin.php?page=aspireupdate-settings&redirected=1'); exit; } } });"
+		},
 		{
 			"step": "writeFile",
 			"path": "/wordpress/wp-content/mu-plugins/rewrite.php",
