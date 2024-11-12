@@ -22,12 +22,11 @@
 		"plugin-check"
 	],
 	"features": {
-		"networking": true,
-		"multisite": true
+		"networking": true
 	},
 	"login": true,
 	"steps": [
-		{
+		{"step": "enableMultisite",
 			"step": "defineWpConfigConsts",
 			"consts": {
 				"WP_DISABLE_FATAL_ERROR_HANDLER": false,
