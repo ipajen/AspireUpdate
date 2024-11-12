@@ -22,7 +22,8 @@
 		"plugin-check"
 	],
 	"features": {
-		"networking": true
+		"networking": true,
+		"multisite": true
 	},
 	"login": true,
 	"steps": [
