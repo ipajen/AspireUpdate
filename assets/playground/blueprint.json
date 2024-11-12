@@ -37,6 +37,11 @@
 			}
 		},
 		{
+   			 "step": "writeFile",
+  			  "path": "/wordpress/wp-content/mu-plugins/redirect-landing.php",
+  			  "data": "<?php add_action('admin_init', function() { if (is_multisite()) { wp_redirect('/wp-admin/network/index.php?page=aspireupdate-settings'); exit; } else { wp_redirect('/wp-admin/admin.php?page=aspireupdate-settings'); exit; } });"
+		},
+		{
 			"step": "writeFile",
 			"path": "/wordpress/wp-content/mu-plugins/rewrite.php",
 			"data": "<?php /* Use pretty permalinks */ add_action( 'after_setup_theme', function() { global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); $wp_rewrite->flush_rules(); } );"
